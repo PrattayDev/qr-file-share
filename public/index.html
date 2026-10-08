@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR File Share - ফাইল থেকে QR Code বানান</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Background animated blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">📱</span>
+        <h1>QR File Share</h1>
+      </div>
+      <p class="subtitle">যেকোনো ফাইল আপলোড করুন — ভিডিও, PDF, ছবি — QR Code পান তাৎক্ষণিক!</p>
+    </header>
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+      <div class="upload-area" id="dropZone">
+        <div class="upload-content">
+          <div class="upload-icon">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <h3>ফাইল টেনে এখানে ছাড়ুন</h3>
+          <p>অথবা ক্লিক করে ফাইল সিলেক্ট করুন</p>
+          <div class="supported-types">
+            <span class="type-badge">📹 Video</span>
+            <span class="type-badge">📄 PDF</span>
+            <span class="type-badge">🖼️ Image</span>
+            <span class="type-badge">🎵 Audio</span>
+            <span class="type-badge">📁 Any File</span>
+          </div>
+          <p class="size-limit">সর্বোচ্চ ফাইল সাইজ: 500MB</p>
+        </div>
+        <input type="file" id="fileInput" hidden>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-container" id="progressContainer" style="display:none;">
+        <div class="progress-info">
+          <span id="progressFileName"></span>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Section -->
+    <div class="result-section" id="resultSection" style="display:none;">
+      <div class="result-card">
+        <div class="result-header">
+          <h2>✅ QR Code তৈরি হয়েছে!</h2>
+          <p>এই QR Code স্ক্যান করলে ফাইলটি দেখা ও ডাউনলোড করা যাবে</p>
+        </div>
+
+        <div class="result-body">
+          <div class="qr-display">
+            <div class="qr-frame">
+              <img id="qrCodeImage" src="" alt="QR Code">
+            </div>
+            <button class="btn btn-download-qr" id="downloadQrBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              QR Code ডাউনলোড করুন
+            </button>
+          </div>
+
+          <div class="file-info-panel">
+            <div class="info-item">
+              <span class="info-label">📄 ফাইলের নাম</span>
+              <span class="info-value" id="resultFileName"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">📦 সাইজ</span>
+              <span class="info-value" id="resultFileSize"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">🔗 লিংক</span>
+              <div class="link-copy">
+                <input type="text" id="resultFileUrl" readonly>
+                <button class="btn-copy" id="copyLinkBtn" title="কপি করুন">📋</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <button class="btn btn-primary" id="uploadAnotherBtn">
+            ➕ আরেকটি ফাইল আপলোড করুন
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Section -->
+    <div class="history-section" id="historySection">
+      <h3 class="section-title">📋 সাম্প্রতিক আপলোড</h3>
+      <div class="history-list" id="historyList">
+        <p class="empty-state">কোনো ফাইল আপলোড হয়নি এখনও</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>💡 <strong>টিপ:</strong> এই QR Code যেকোনো মোবাইল দিয়ে স্ক্যান করা যাবে — দুনিয়ার যেকোনো প্রান্ত থেকে ডাউনলোড করা যাবে!</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
